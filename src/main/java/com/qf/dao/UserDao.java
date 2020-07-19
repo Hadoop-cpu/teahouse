@@ -1,5 +1,6 @@
 package com.qf.dao;
 
+import com.qf.pojo.User;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,4 +11,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserDao {
+    //修改user信息
+    int updateUser(User user);
+    //根据id查询用户信息
+    User selectUserById(int user_id);
 }
