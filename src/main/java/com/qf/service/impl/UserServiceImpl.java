@@ -13,7 +13,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
-
     @Override
     public R updateUser(User user) {
         int i = userDao.updateUser(user);
@@ -27,7 +26,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public R selectUserById(Integer user_id) {
         User user = userDao.selectUserById(user_id);
-
         if (user == null) {
             return R.error("查询失败");
         } else {

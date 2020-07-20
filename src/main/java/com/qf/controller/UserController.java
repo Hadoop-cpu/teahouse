@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @ClassName: UserController
- * @Author:
+ * @Author: 马陈浩
  * @Date: 2020/7/18
  * @Time: 11:23
  */
@@ -20,19 +20,15 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private UserService userService;
-
     /**
      * 修改用户信息
-     *
      * @param user
      * @return
      */
     @PostMapping("/updateUser")
     public R updateUser(User user) {
-
         return userService.updateUser(user);
     }
-
     /**
      * 根据id查询用户信息
      */
@@ -40,5 +36,4 @@ public class UserController {
     public R selectUserById(@PathVariable Integer id) {
         return userService.selectUserById(id);
     }
-
 }
