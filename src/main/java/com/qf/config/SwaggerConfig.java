@@ -28,7 +28,7 @@ public class SwaggerConfig {
         ApiInfo apiInfo = new ApiInfoBuilder().
                 title("茶小屋后端接口文档").
                 description("茶小屋项目的所有接口信息，可以查看对应得接口信息和对接口进行测试").
-                contact(new Contact("王一", "http://localhost:8080/doc.html","Hadoop_CPU@163.com")).
+                contact(new Contact("茶小屋团队", "http://localhost:8080/doc.html","Hadoop_CPU@163.com")).
                 build();
         return apiInfo;
     }
