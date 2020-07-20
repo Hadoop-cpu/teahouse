@@ -12,9 +12,9 @@ import lombok.Data;
 public class Recipients {
 
     private Integer recipients_id;      //收件人信息id
-    private String recipients_user_id;  //关联的用户id
-    private Integer recipients_name;    //名字
-    private Integer recipients_phone;   //收件电话
-    private Integer recipients_address; //地址
+    private Integer recipients_user_id;  //关联的用户id
+    private String recipients_name;    //名字
+    private String recipients_phone;   //收件电话
+    private String recipients_address; //地址
 
 }
