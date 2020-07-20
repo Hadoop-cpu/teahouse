@@ -1,6 +1,8 @@
 package com.qf.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @ClassName: recipients
@@ -9,6 +11,8 @@ import lombok.Data;
  * @Time: 10:36
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Recipients {
 
     private Integer recipients_id;      //收件人信息id
