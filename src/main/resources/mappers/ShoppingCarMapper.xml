@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.dao.ShoppingCarDao">
+
+    <delete id="deleteAllGoodsInShoppingCarById">
+        delete from shoppingcar
+        where shoppingcar.user_id = #{userId}
+        and shoppingcar.car_id in 
+        <foreach collection="carIds" open="(" separator="," close=")" item="car_id" index="i">
+            #{car_id}
+        </foreach>
+    </delete>
+
+    <select id="queryGoodsShopPriceSumByCarId">
+        SELECT goods.goods_shop_price, shoppingcar.car_goods_num
+        FROM shoppingcar, goods
+        WHERE shoppingcar.goods_id = goods.goods_id
+        and shoppingcar.car_id in
+        <foreach collection="carIds" open="(" separator="," close=")" item="car_id" index="i">
+            #{car_id}
+        </foreach>
+    </select>
+
+    <select id="queryGoodsMarketPriceSumByCarId">
+        SELECT goods.goods_market_price, shoppingcar.car_goods_num
+        FROM shoppingcar, goods
+        WHERE shoppingcar.goods_id = goods.goods_id
+        and shoppingcar.car_id in
+        <foreach collection="carIds" open="(" separator="," close=")" item="car_id" index="i">
+            #{car_id}
+        </foreach>
+    </select>
+
+</mapper>
