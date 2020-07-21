@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.dao.UserDao">
+    <select id="selectUserById" resultType="User" parameterType="Integer">
+        select * from user where user_id = #{user_id}
+    </select>
+
+
+    <update id="updateUser" parameterType="User">
+        update user
+        <set>
+            <if test="user_name != null">
+                user_name = #{user_name},
+            </if>
+            <if test="user_TrueName != null">
+                user_TrueName = #{user_TrueName},
+            </if>
+            <if test="user_sex != null">
+                user_sex = #{user_sex},
+            </if>
+            <if test="user_phone != null">
+                user_phone = #{user_phone},
+            </if>
+            <if test="user_email != null">
+                user_email = #{user_email},
+            </if>
+            <if test="user_pwd != null">
+                user_pwd = #{user_pwd},
+            </if>
+            <if test="user_TrueName != null">
+                user_TrueName = #{user_TrueName},
+            </if>
+        </set>
+        WHERE user_id = #{user_id}
+    </update>
+
+</mapper>
