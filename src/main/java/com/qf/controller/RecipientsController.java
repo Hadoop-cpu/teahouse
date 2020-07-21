@@ -5,6 +5,7 @@ import com.qf.service.RecipientsService;
 import com.qf.vo.R;
 import com.sun.org.glassfish.gmbal.ParameterNames;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +32,7 @@ public class RecipientsController {
      * @param
      * @return
      */
+    @ApiOperation(value = "根据id删除收货人信息")
     @PostMapping("/deleteRecipients/{id}")
     public R deleteRecipients(@PathVariable int id){
         return recipientsService.deleteRecipientsByRecipId(id);
@@ -41,6 +43,7 @@ public class RecipientsController {
      * @param recipients
      * @return
      */
+    @ApiOperation(value = "根据id修改收货人信息")
     @PostMapping("/updateRecipients")
     public R updateRecipients(Recipients recipients){
         return recipientsService.updateRecipients(recipients);
@@ -48,6 +51,7 @@ public class RecipientsController {
     /*
     根据user_id查询收货人所有的信息
      */
+    @ApiOperation(value = "根据id查询收货人信息")
     @PostMapping("/selectRecipients/{id}")
     public R selectRecipients(@PathVariable int id){
         return recipientsService.selectRecipientsByUserId(id);

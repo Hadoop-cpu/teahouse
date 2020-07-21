@@ -31,21 +31,16 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
     @Autowired
     private UserService service;
-
     @Autowired
     private UserService userService;
-    /**
-     * 修改用户信息
-     * @param user
-     * @return
-     */
+
+    @ApiOperation(value = "修改用户信息")
     @PostMapping("/updateUser")
     public R updateUser(User user) {
         return userService.updateUser(user);
     }
-    /**
-     * 根据id查询用户信息
-     */
+
+    @ApiOperation(value = "根据id查询用户信息")
     @PostMapping("/selectUserById/{id}")
     public R selectUserById(@PathVariable Integer id) {
         return userService.selectUserById(id);
