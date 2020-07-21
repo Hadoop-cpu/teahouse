@@ -25,7 +25,6 @@ public interface UserService {
     R selectUserById(Integer user_id);
 
 
-public interface UserService {
     R checkUser_phone(String user_phone);
     R login(UserLoginDto loginDto);
     R register(UserDto dto);
