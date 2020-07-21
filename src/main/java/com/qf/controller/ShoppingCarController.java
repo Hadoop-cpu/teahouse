@@ -62,7 +62,7 @@ public class ShoppingCarController {
 
     @PostMapping("queryGoodsPriceInShoppingCar")
     public R queryGoodsPriceInShoppingCar(Integer[] carIds){
-        return shoppingCarService.queryGoodsPriceInShoppingCar(carIds);
+        return shoppingCarService.queryGoodsShopPriceSumByCarId(carIds);
     }
 
 }
