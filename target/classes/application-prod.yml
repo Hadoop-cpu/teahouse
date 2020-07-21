@@ -10,7 +10,7 @@ spring:
   # 自定义
 voter:
   redis:
-    host: 10.8.152.5
+    host:
     port: 6379
     pass: admin
   aes:

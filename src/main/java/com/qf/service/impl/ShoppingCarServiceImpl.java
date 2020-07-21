@@ -152,12 +152,10 @@ public class ShoppingCarServiceImpl implements ShoppingCarService {
                 }
 
                 System.out.println(goodsShopPriceSum);
-
                 return R.ok(goodsShopPriceSum);
             }
 
         }
     }
-
 
 }
