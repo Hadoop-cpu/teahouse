@@ -40,6 +40,16 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    public R updateUser(User user) {
+        return null;
+    }
+
+    @Override
+    public R selectUserById(Integer user_id) {
+        return null;
+    }
+
+    @Override
     public R checkUser_phone(String user_phone) {
         User user = dao.selectByPhone(user_phone);
         if (user != null) {
