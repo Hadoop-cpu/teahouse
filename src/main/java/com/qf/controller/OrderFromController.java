@@ -2,6 +2,7 @@ package com.qf.controller;
 
 
 
+import com.qf.dto.OrderFromDto;
 import com.qf.service.OrderFromService;
 import com.qf.vo.R;
 import io.swagger.annotations.Api;
@@ -33,12 +34,32 @@ public class OrderFromController {
 //    }
 
     //查询个人订单
-    @ApiOperation(value="查询个人订单")
+    @ApiOperation(value="查询个人历史订单")
     @GetMapping("/finAll")
     public R findAll(Integer user_id ){
-        R all = service.findAll(user_id);
+        service.findAll(user_id);
        // System.out.println(all + "++++++");
-        return R.ok(all);
+        return (service.findAll(user_id));
     }
+    //提交个人订单详细信息
+
+    @ApiOperation(value="订单详细信息")
+    @GetMapping("/finOrder")
+    public R  findOrder(Integer car_id){
+        R order = service.findOrder(car_id);
+        // System.out.println(all + "++++++");
+        return order;
+    }
+
+
+
     //确认订单
+
+    /*@GetMapping("/insertOrderFrom")
+    public R insertOrderFrom(OrderFromDto dto) {
+        R r = service.insertOrderFrom(dto);
+        return R.ok(r);
+    }
+*/
+
 }
