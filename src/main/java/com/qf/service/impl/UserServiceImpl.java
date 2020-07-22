@@ -152,8 +152,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public R changePass(String token, String pass) {
         if (jedisCore.checkKey(RedisKeyConfig.TOKEN_USER + token)) {
-            User user = JSON.parseObject(jedisCore.get(RedisKeyConfig.PHONE_TOKEN + token), User.class);
+            User user = JSON.parseObject(jedisCore.get(RedisKeyConfig.TOKEN_USER + token), User.class);
+            System.out.println("456");
             if (dao.changePsw(user.getUser_id(), EncryptUtil.aesenc(key, pass)) > 0) {
+                System.out.println("123");
                 //删除令牌
                 jedisCore.del(RedisKeyConfig.TOKEN_USER + token);
                 jedisCore.del(RedisKeyConfig.PHONE_TOKEN + user.getUser_pwd());

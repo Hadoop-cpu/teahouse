@@ -2,6 +2,7 @@ package com.qf.service;
 
 
 
+import com.qf.dto.OrderFromDto;
 import com.qf.vo.R;
 
 /**
@@ -18,6 +19,12 @@ public interface OrderFromService {
     //订单个人查询(没用ov)
    // List<OrderFromDto> findAll(Integer user_id);
 
+    //订单个人查询
     R findAll(Integer user_id);
 
+    //提交个人订单详细信息
+    R findOrder(Integer car_id);
+
+    //确认订单
+    R insertOrderFrom (OrderFromDto dto);
 }

@@ -13,4 +13,6 @@ public interface RecipientsService {
     R deleteRecipientsByRecipId(Integer recipients_id);
     //查询Recipients信息
     R selectRecipientsByUserId(Integer user_id);
+
+    R selectRecipients();
 }
