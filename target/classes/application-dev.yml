@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/db_voter?serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/db_teahouse?serverTimezone=Asia/Shanghai
     username: root
     password: admin
     type: com.alibaba.druid.pool.DruidDataSource
@@ -11,10 +11,9 @@ spring:
 
 voter:
   redis:
-    host: 10.8.152.5
+    host: 39.99.212.238
     port: 6379
     pass: admin
-
 
 
   aes:

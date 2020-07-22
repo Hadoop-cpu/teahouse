@@ -1,6 +1,5 @@
 package com.qf.service.impl;
 
-
 import com.alibaba.fastjson.JSON;
 import com.qf.config.RedisKeyConfig;
 import com.qf.dao.UserDao;
@@ -38,6 +37,34 @@ public class UserServiceImpl implements UserService {
     @Value("${voter.aes.passkey}")   ///有问题需要解决
     public String key;
 
+    /**
+     * 修改用户信息
+     * @param user
+     * @return
+     */
+    @Override
+    public R updateUser(User user) {
+        int i = dao.updateUser(user);
+        if (i == 1) {
+            return R.ok();
+        } else {
+            return R.error("修改失败");
+        }
+    }
+
+    /**
+     * 根据id查询用户信息
+     */
+    public R selectUserById(Integer user_id) {
+        User user = dao.selectUserById(user_id);
+        if (user == null) {
+            return R.error("查询失败");
+        } else {
+            System.out.println(R.ok(user));
+            R ok = R.ok(user);
+            return ok;
+        }
+    }
 
     @Override
     public R checkUser_phone(String user_phone) {

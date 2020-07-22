@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import com.qf.constant.SystemConstant;
 import com.qf.dto.UserDto;
 import com.qf.dto.UserLoginDto;
-import com.qf.service.UserService;
-import com.qf.vo.R;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,29 +29,24 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
+    @Autowired
+    private UserService service;
     @Autowired
     private UserService userService;
-    /**
-     * 修改用户信息
-     * @param user
-     * @return
-     */
+
+    @ApiOperation(value = "修改用户信息")
     @PostMapping("/updateUser")
     public R updateUser(User user) {
         return userService.updateUser(user);
     }
-    /**
-     * 根据id查询用户信息
-     */
+
+    @ApiOperation(value = "根据id查询用户信息")
     @PostMapping("/selectUserById/{id}")
     public R selectUserById(@PathVariable Integer id) {
         return userService.selectUserById(id);
 
 
-    @Autowired
-    private UserService service;
-
+    }
     @ApiOperation(value = "校验手机号是否存在", notes = "校验手机号是否存在")
     @GetMapping("api/user/checkUser_phone/{user_phone}")
     public R check(@PathVariable String user_phone){
