@@ -2,12 +2,15 @@ package com.qf.service.impl;
 
 import com.qf.dao.OrderFromDao;
 import com.qf.dto.OrderFromDto;
+import com.qf.dto.OrderSubmissionDto;
 import com.qf.service.OrderFromService;
 import com.qf.vo.R;
+import org.apache.ibatis.annotations.Insert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -38,9 +41,23 @@ public class OrderFromServiceImpl implements OrderFromService {
     @Override
     public R findAll(Integer user_id) {
 
-        List<OrderFromDto> list = dao.findAl(user_id);
-
+        List<OrderFromDto> list = dao.findAll(user_id);
         return R.ok(list);
+    }
+
+    //提交个人订单详细信息
+    @Override
+    public R findOrder(Integer car_id) {
+        List<OrderSubmissionDto> order = dao.findOrder(car_id);
+        return R.ok(order);
+    }
+
+
+    //确认订单详细信息
+    @Override
+    public R insertOrderFrom(OrderFromDto dto) {
+        int i = dao.insertOrderFrom(dto);
+        return R.ok(i);
     }
 
 }
