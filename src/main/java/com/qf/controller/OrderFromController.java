@@ -43,7 +43,7 @@ public class OrderFromController {
     }
     //提交个人订单详细信息
 
-    @ApiOperation(value="提交个人订单详细信息")
+    @ApiOperation(value="订单详细信息")
     @GetMapping("/finOrder")
     public R  findOrder(Integer car_id){
         R order = service.findOrder(car_id);
@@ -55,11 +55,11 @@ public class OrderFromController {
 
     //确认订单
 
-    @GetMapping("/insertOrderFrom")
+    /*@GetMapping("/insertOrderFrom")
     public R insertOrderFrom(OrderFromDto dto) {
         R r = service.insertOrderFrom(dto);
         return R.ok(r);
     }
-
+*/
 
 }
