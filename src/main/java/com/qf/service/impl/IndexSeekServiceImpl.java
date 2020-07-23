@@ -38,6 +38,18 @@ public class IndexSeekServiceImpl implements IndexSeekService{
         return R.ok(list);
     }
 
+    @Override
+    public R indexByVariety (String variety_name) {
+        List<IndexDto> list = indexSeekDao.indexByVariety(variety_name);
+        return R.ok(list);
+    }
+
+    @Override
+    public R indexByPrice (int low_price, int high_price) {
+        List<IndexDto> list = indexSeekDao.indexByPrice(low_price, high_price);
+        return R.ok(list);
+    }
+
     /*@Override
     public LayuiR indexSeek (String goods_name, int pageNo, int pageSize) {
         IndexDto indexDto = new IndexDto();

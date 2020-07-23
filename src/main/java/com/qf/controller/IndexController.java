@@ -31,13 +31,28 @@ public class IndexController {
     @GetMapping("/query")
     public R indexSeek(String goods_name) {
         R r = seekService.indexSeek(goods_name);
-        return R.ok(r);
+        return r;
     }
 
     @ApiOperation(value = "根据品牌展示商品")
     @GetMapping("/indexByBrand")
     public R indexByBrand(int goods_brand){
         R r = seekService.indexByBrand(goods_brand);
-        return R.ok(r);
+        return r;
+    }
+
+    @ApiOperation(value = "根据品种展示商品")
+    @GetMapping("/indexByVariety")
+    public R indexByVariety(String goods_variety) {
+        R r = seekService.indexByVariety(goods_variety);
+
+        return r;
+    }
+
+    @ApiOperation(value = "根据价格区间显示商品")
+    @GetMapping("/indexByPrice")
+    public R indexByPrice(int low_price, int high_price){
+        R r = seekService.indexByPrice(low_price, high_price);
+        return r;
     }
 }

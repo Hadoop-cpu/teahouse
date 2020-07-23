@@ -14,4 +14,7 @@ public interface IndexSeekService {
     //LayuiR indexSeek(String goods_name, int pageNo, int pageSize);
     R indexSeek(String goods_name);
     R indexByBrand(int goods_brand);
+    R indexByVariety(String variety_name);
+
+    R indexByPrice(int low_price, int high_price);
 }
