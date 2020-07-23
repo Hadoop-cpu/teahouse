@@ -7,6 +7,9 @@
     <select id="selectRecipientsByUserId" resultType="recipients">
         select * from recipients WHERE `recipients_user_id` = #{userId};
     </select>
+    <select id="selectRecipients" resultType="recipients">
+        select * from recipients
+    </select>
 
     <delete id="deleteRecipientsByRecipId" parameterType="Integer">
         delete from recipients WHERE recipients_id = #{recipients_id};

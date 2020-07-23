@@ -19,4 +19,6 @@ public interface RecipientsDao {
     int deleteRecipientsByRecipId(Integer recipients_id);
     //查询Recipients信息
     List<Recipients> selectRecipientsByUserId(Integer user_id);
+
+    List<Recipients> selectRecipients();
 }

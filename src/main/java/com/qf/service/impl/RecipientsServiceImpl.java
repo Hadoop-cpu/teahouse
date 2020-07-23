@@ -7,6 +7,7 @@ import com.qf.vo.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -41,6 +42,18 @@ public class RecipientsServiceImpl implements RecipientsService {
             return R.ok(recipientsList);
         } else {
             return R.error("查询失败");
+        }
+    }
+
+    @Override
+    public R selectRecipients() {
+        List<Recipients> recipients = recipientsDao.selectRecipients();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("recipients" , recipients);
+        if (map != null) {
+            return R.ok(map);
+        }else  {
+            return  R.error("查询失败");
         }
     }
 }
