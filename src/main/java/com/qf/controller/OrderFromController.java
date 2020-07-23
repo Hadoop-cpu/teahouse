@@ -37,9 +37,10 @@ public class OrderFromController {
     @ApiOperation(value="查询个人历史订单")
     @GetMapping("/finAll")
     public R findAll(Integer user_id ){
-        service.findAll(user_id);
-       // System.out.println(all + "++++++");
-        return (service.findAll(user_id));
+        
+		R all = service.findAll(user_id);
+    
+        return all;
     }
     //提交个人订单详细信息
 

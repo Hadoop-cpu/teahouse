@@ -25,31 +25,25 @@ public class OrderFromServiceImpl implements OrderFromService {
     @Autowired
     private OrderFromDao dao;
 
-
-    //订单个人查询
-//    @Override
-//    public List<Map<String,Object>> findAll(Integer user_id) {
-//
-//        return dao.findAll(user_id);
-//    }
-
-    //订单个人查询(没有vo)
-//    @Override
-//    public List<OrderFromDto> findAll(Integer user_id) {
-//        return dao.findAl(user_id);
-//    }
+    // 订单个人查询
     @Override
     public R findAll(Integer user_id) {
+        if (user_id != null) {
 
-        List<OrderFromDto> list = dao.findAll(user_id);
-        return R.ok(list);
+                List<OrderFromDto> list = dao.findOrderWhereFlag(user_id);
+                System.out.println(list);
+                    return R.ok(list);
+        }
+        return R.error("亲，请登录！");
     }
 
     //提交个人订单详细信息
     @Override
     public R findOrder(Integer car_id) {
+
         List<OrderSubmissionDto> order = dao.findOrder(car_id);
         return R.ok(order);
+        
     }
 
 
