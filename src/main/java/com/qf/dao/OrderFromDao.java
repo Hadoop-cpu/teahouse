@@ -32,9 +32,17 @@ public interface OrderFromDao {
     //@Select("SELECT goods.goods_name, orderfrom.creation_time, shoppingcar.car_goods_num, user.user_id, orderfrom.order_id, orderfrom.order_flag, orderfrom.order_price from user, shoppingcar, goods, orderfrom WHERE user.user_id = shoppingcar.user_id and goods.goods_id = shoppingcar.goods_id and shoppingcar.order_id = orderfrom.order_id and user.user_id = #{user_id}")
     //List<Map<String,Object>> findAll(Integer user_id);
 
+    //查询订单状态
+    @Select("SELECT orderfrom.order_flag from  orderfrom WHERE orderfrom.user_id =#{user_id}")
+    int findFlag(Integer user_id);
+
     //订单个人查询
     @Select("SELECT goods.goods_name, orderfrom.creation_time, shoppingcar.car_goods_num, user.user_id, orderfrom.order_id, orderfrom.order_flag, orderfrom.order_price from user, shoppingcar, goods, orderfrom WHERE user.user_id = shoppingcar.user_id and goods.goods_id = shoppingcar.goods_id and user.user_id = #{user_id}")
     List<OrderFromDto> findAll(Integer user_id);
+
+    //订单个人查询 flag=1 已付款
+    @Select("SELECT goods.goods_name, orderfrom.creation_time, shoppingcar.car_goods_num, user.user_id, orderfrom.order_id, orderfrom.order_flag, orderfrom.order_price from user, shoppingcar, goods, orderfrom WHERE user.user_id = shoppingcar.user_id and goods.goods_id = shoppingcar.goods_id and user.user_id = #{user_id} and order_flag=1")
+    List<OrderFromDto> findOrderWhereFlag(Integer user_id);
 
     //提交个人订单详细信息
     @Select("SELECT goods.goods_name, shoppingcar.car_goods_num, orderfrom.order_price, shoppingcar.car_id FROM orderfrom, goods, shoppingcar WHERE goods.goods_id = shoppingcar.goods_id and shoppingcar.car_id =#{car_id}")

@@ -3,6 +3,7 @@ package com.qf.controller;
 import com.qf.service.ShoppingCarService;
 import com.qf.vo.R;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,16 +21,19 @@ public class ShoppingCarController {
     private ShoppingCarService shoppingCarService;
 
     //根据用户id查询购物车
+    @ApiOperation(value = "根据用户id查询购物车")
     @PostMapping("selectShoppingCarByUserId")
     public R selectShoppingCarByUserId(Integer userId){
         return shoppingCarService.selectShoppingCarByUserId(userId);
     }
 
+    @ApiOperation(value = "根据购物车id删除商品")
     @PostMapping("deleteGoodsInShoppingCarById")
     public R deleteGoodsInShoppingCarById(Integer userId, Integer carId){
         return shoppingCarService.deleteGoodsInShoppingCarById(userId, carId);
     }
 
+    @ApiOperation(value = "根据商品Id添加到购物车")
     @PostMapping("insertGoodsInShoppingCarByGoodsId")
     public R insertGoodsInShoppingCarByGoodsId(Integer userId, Integer goodsId){
         return shoppingCarService.insertGoodsInShoppingCarByGoodsId(userId, goodsId);
