@@ -35,13 +35,14 @@ public interface IndexSeekDao {
             " AND goods_name LIKE #{goods_name}")
     List<IndexDto> indexSeek(String goods_name);
 
-    //根据评判展示相应商品
+    //根据品牌展示相应商品
     @Select("SELECT goods_name, goods_market_price, goods_shop_price,goods_sales, img_main\n" +
             "FROM goods g, goods_img i\n" +
             "WHERE g.goods_img = i.img_id\n" +
             "AND g.goods_brand = #{goods_brand}")
     List<IndexDto> indexByBrand(int goods_brand);
 
+    //根据茶的品种展示相应商品
     @Select("SELECT goods_name, goods_market_price, goods_shop_price,goods_sales, img_main\n" +
             "FROM goods g, goods_img i\n" +
             "WHERE g.goods_img =i.img_id\n" +
@@ -49,6 +50,13 @@ public interface IndexSeekDao {
             "SELECT variety_id\n" +
             "FROM goods_variety WHERE variety_name = #{variety_name})")
     List<IndexDto> indexByVariety(String variety_name);
+
+    @Select("SELECT goods_name, goods_market_price, goods_shop_price,goods_sales, img_main\n" +
+            "FROM goods g, goods_img i\n" +
+            "WHERE g.`goods_img` = i.`img_id`\n" +
+            "AND g.`goods_shop_price` > #{low_price}\n" +
+            "AND g.`goods_shop_price` < #{high_price}")
+    List<IndexDto> indexByPrice(int low_price, int high_price);
 }
 
 

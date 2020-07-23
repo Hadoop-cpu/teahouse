@@ -1,5 +1,7 @@
 package com.qf.service;
 
+import com.qf.dto.ShoppingCarDto;
+import com.qf.pojo.ShoppingCar;
 import com.qf.vo.R;
 
 import java.util.List;
@@ -19,6 +21,12 @@ public interface ShoppingCarService {
     //改变购物车种指定商品的数量
     R updateGoodsNumInShoppingByCarId(Integer carId, Integer goodsNum);
 
+    //将购物车中的指定商品数量+1
+    R carGoodsNumAddOne(Integer carId);
+
+    //将购物车中的指定商品数量-1
+    R carGoodsNumTallyDown(Integer carId);
+
     //批量删除
     R deleteAllGoodsInShoppingCarById(Integer userId, Integer[] carIds);
 
@@ -27,4 +35,7 @@ public interface ShoppingCarService {
 
     //查询购物车中选中商品商城价的总价
     R queryGoodsShopPriceSumByCarId(Integer[] carIds);
+
+    //查询购物车中选中商品   市场价   的总价
+    R queryGoodsMarketPriceSumByCarId(Integer[] carIds);
 }

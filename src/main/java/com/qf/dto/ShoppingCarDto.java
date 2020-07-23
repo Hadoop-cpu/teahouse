@@ -19,22 +19,22 @@ import lombok.NoArgsConstructor;
 public class ShoppingCarDto {
 
     @BeanCopyField("car_id")
-    private Integer carId;
+    private Integer car_id;
 
     @BeanCopyField("user_id")
-    private Integer userId;
+    private Integer user_id;
 
     @BeanCopyField("goods_id")
-    private Integer goodsId;
+    private Integer goods_id;
 
     @BeanCopyField("car_goods_num")
-    private Integer carGoodsNum;
+    private Integer car_goods_num;
 
     @BeanCopyField("goods_name")
-    private String goodsName;
+    private String goods_name;
 
     @BeanCopyField("img_main")
-    private String imgMain;
+    private String img_main;
 
     @BeanCopyField("goods_type_id")
     private Integer goods_type_id;
@@ -44,5 +44,7 @@ public class ShoppingCarDto {
 
     @BeanCopyField("goods_shop_price")
     private Double goods_shop_price;
+
+
 
 }
