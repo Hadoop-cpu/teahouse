@@ -36,13 +36,13 @@ public class ShoppingCarController {
     }
 
     @PostMapping("carGoodsNumAddOne")
-    public R carGoodsNumAddOne(Integer carId, Integer goodsNum){
-        return shoppingCarService.updateGoodsNumInShoppingByCarId(carId, goodsNum + 1);
+    public R carGoodsNumAddOne(Integer carId){
+        return shoppingCarService.carGoodsNumAddOne(carId);
     }
 
     @PostMapping("carGoodsNumTallyDown")
-    public R carGoodsNumTallyDown(Integer carId, Integer goodsNum){
-        return shoppingCarService.updateGoodsNumInShoppingByCarId(carId, goodsNum - 1);
+    public R carGoodsNumTallyDown(Integer carId){
+        return shoppingCarService.carGoodsNumTallyDown(carId);
     }
 
     @PostMapping("updateGoodsNumInShoppingByCarId")
@@ -60,9 +60,15 @@ public class ShoppingCarController {
         return shoppingCarService.queryGoodsNumInShoppingCar(userId);
     }
 
-    @PostMapping("queryGoodsPriceInShoppingCar")
-    public R queryGoodsPriceInShoppingCar(Integer[] carIds){
+    @PostMapping("queryGoodsShopPriceSumByCarId")
+    public R queryGoodsShopPriceSumByCarId(Integer[] carIds){
         return shoppingCarService.queryGoodsShopPriceSumByCarId(carIds);
     }
+
+    @PostMapping("queryGoodsMarketPriceSumByCarId")
+    public R queryGoodsMarketPriceSumByCarId(Integer[] carIds){
+        return shoppingCarService.queryGoodsMarketPriceSumByCarId(carIds);
+    }
+
 
 }

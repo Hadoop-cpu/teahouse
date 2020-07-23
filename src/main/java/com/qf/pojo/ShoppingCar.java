@@ -15,9 +15,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ShoppingCar {
 
-    private Integer carId;          //购物车id
-    private Integer goodsId;        //商品id
-    private Integer userId;         //所属用户Id
-    private Integer carGoodsNum;    //购物车中的商品数量
+    private Integer car_id;          //购物车id
+    private Integer goods_id;        //商品id
+    private Integer user_id;         //所属用户Id
+    private Integer car_goods_num;   //购物车中的商品数量
 
 }
+
