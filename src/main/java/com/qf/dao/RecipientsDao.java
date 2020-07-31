@@ -1,6 +1,7 @@
 package com.qf.dao;
 
 import com.qf.pojo.Recipients;
+import com.qf.vo.R;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -19,6 +20,9 @@ public interface RecipientsDao {
     int deleteRecipientsByRecipId(Integer recipients_id);
     //查询Recipients信息
     List<Recipients> selectRecipientsByUserId(Integer user_id);
-
+    //根据id查询Recipients
+    Recipients selectRecipientsByOne(Integer recipients_id);
+    //添加Recipients信息
+    int insertRecipients(Recipients recipients);
     List<Recipients> selectRecipients();
 }

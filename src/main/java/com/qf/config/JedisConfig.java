@@ -20,9 +20,13 @@ public class JedisConfig {
     private int port;
     @Value("${voter.redis.pass}")
     private String pass;
+    @Value("${voter.redis.maxTotal}")
+    private int maxTotal;
+    @Value("${voter.redis.maxIdle}")
+    private int maxIdle;
 
     @Bean
     public JedisCore createJC(){
-        return new JedisCore(host,port,pass);
+        return new JedisCore(maxTotal,maxIdle,host,port,pass);
     }
 }

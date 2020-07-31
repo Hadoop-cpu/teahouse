@@ -14,6 +14,7 @@ import com.qf.util.TokenUtil;
 import com.qf.vo.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,6 +40,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 修改用户信息
+     *
      * @param user
      * @return
      */
@@ -97,6 +99,8 @@ public class UserServiceImpl implements UserService {
                     jedisCore.set(RedisKeyConfig.TOKEN_USER + token, JSON.toJSONString(user), RedisKeyConfig.TOKEN_TIME);
                     System.out.println(token);
                     iserror = false;
+
+                    //这里将token存储到回调函数中
                     return R.ok(token);
 
                 }
@@ -151,6 +155,7 @@ public class UserServiceImpl implements UserService {
     //修改密码
     @Override
     public R changePass(String token, String pass) {
+
         if (jedisCore.checkKey(RedisKeyConfig.TOKEN_USER + token)) {
             User user = JSON.parseObject(jedisCore.get(RedisKeyConfig.TOKEN_USER + token), User.class);
             System.out.println("456");
@@ -158,7 +163,7 @@ public class UserServiceImpl implements UserService {
                 System.out.println("123");
                 //删除令牌
                 jedisCore.del(RedisKeyConfig.TOKEN_USER + token);
-                jedisCore.del(RedisKeyConfig.PHONE_TOKEN + user.getUser_pwd());
+                jedisCore.del(RedisKeyConfig.PHONE_TOKEN + user.getUser_phone());
                 return R.ok("密0码修改成功，请重新登录");
             }
         }
@@ -181,10 +186,12 @@ public class UserServiceImpl implements UserService {
     public R loginout(String token) {
         if (token != null && token.length() > 0) {
             User user = JSON.parseObject(jedisCore.get(RedisKeyConfig.TOKEN_USER + token), User.class);
-
-            jedisCore.del(RedisKeyConfig.PHONE_TOKEN + user.getUser_phone());
-            jedisCore.del(RedisKeyConfig.TOKEN_USER + token);
-            return R.ok();
+            if (user != null) {
+                jedisCore.del(RedisKeyConfig.PHONE_TOKEN + user.getUser_phone());
+                jedisCore.del(RedisKeyConfig.TOKEN_USER + token);
+                return R.ok();
+            }
+            return R.error("登錄身份失效");
         }
         return R.error("请传递令牌");
     }

@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 @Api(tags = "茶小屋 用户相关接口")
 @RestController
 @RequestMapping("/user")
+@CrossOrigin
 public class UserController {
     @Autowired
     private UserService service;
@@ -44,9 +45,8 @@ public class UserController {
     @PostMapping("/selectUserById/{id}")
     public R selectUserById(@PathVariable Integer id) {
         return userService.selectUserById(id);
-
-
     }
+
     @ApiOperation(value = "校验手机号是否存在", notes = "校验手机号是否存在")
     @GetMapping("api/user/checkUser_phone/{user_phone}")
     public R check(@PathVariable String user_phone){
@@ -61,6 +61,7 @@ public class UserController {
 
     @ApiOperation(value = "登录", notes = "登录")
     @PostMapping("api/user/login")
+//    这个地方做了改动
     public R login(@RequestBody UserLoginDto dto){
         return service.login(dto);
     }

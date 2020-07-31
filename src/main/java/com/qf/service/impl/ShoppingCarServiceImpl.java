@@ -1,29 +1,43 @@
 package com.qf.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.qf.config.RedisKeyConfig;
 import com.qf.dao.ShoppingCarDao;
 import com.qf.dto.ShoppingCarDto;
 import com.qf.pojo.ShoppingCar;
+import com.qf.pojo.User;
 import com.qf.service.ShoppingCarService;
+import com.qf.util.JedisCore;
 import com.qf.vo.R;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ShoppingCarServiceImpl implements ShoppingCarService {
 
     @Autowired
     private ShoppingCarDao shoppingCarDao;
+    @Autowired
+    private JedisCore jedisCore;
 
     //根据用户id查询购物车
     @Override
-    public R selectShoppingCarByUserId(Integer userId) {
-        if (userId == null) {
-            return R.error("用户id为空");
-        } else {
-            List<ShoppingCarDto> list = shoppingCarDao.selectShoppingCarByUserId(userId);
+    public R selectShoppingCarByUserId(HttpServletRequest request) {
+
+        String token = request.getHeader("token");
+
+            if (token == null || token =="" || !jedisCore.checkKey(RedisKeyConfig.TOKEN_USER + token)){
+                return R.error("用户未登录");
+            }else {
+            User user = JSON.parseObject(jedisCore.get(RedisKeyConfig.TOKEN_USER + token), User.class);
+
+            Integer user_id = user.getUser_id();
+
+            List<ShoppingCarDto> list = shoppingCarDao.selectShoppingCarByUserId(user_id);
             if (list == null) {
                 return R.error("购物车里没有任何东西");
             } else {
@@ -34,13 +48,17 @@ public class ShoppingCarServiceImpl implements ShoppingCarService {
 
     //删除单个商品
     @Override
-    public R deleteGoodsInShoppingCarById(Integer userId, Integer carId) {
+    public R deleteGoodsInShoppingCarById(Integer carId) {
+
+        System.out.println("carId = " + carId);
+
+
         //参数判断
-        if (userId == null && carId == null) {
+        if (carId == null) {
             return R.error("输入参数有误");
         } else {
             //调用删除方法
-            int i = shoppingCarDao.deleteGoodsInShoppingCarById(userId, carId);
+            int i = shoppingCarDao.deleteGoodsInShoppingCarById(carId);
 
             if (i != 1) {
                 return R.error("删除失败");
@@ -162,18 +180,25 @@ public class ShoppingCarServiceImpl implements ShoppingCarService {
         }
     }
 
-    //查询购物车总商品数量
+    //@查询购物车总商品数量
     @Override
-    public R queryGoodsNumInShoppingCar(Integer userId) {
-        if (userId == null){
-            return R.error("用户信息有误");
-        } else {
-            int i = shoppingCarDao.queryGoodsNumInShoppingCar(userId);
+    public R queryGoodsNumInShoppingCar(HttpServletRequest request) {
+
+        String token = request.getHeader("token");
+
+        if (token == null || token =="" || !jedisCore.checkKey(RedisKeyConfig.TOKEN_USER + token)){
+            return R.error("用户未登录");
+        }else {
+            User user  = JSON.parseObject(jedisCore.get(RedisKeyConfig.TOKEN_USER + token), User.class);
+
+            Integer user_id = user.getUser_id();
+
+            int i = shoppingCarDao.queryGoodsNumInShoppingCar(user_id);
             return R.ok(i);
         }
     }
 
-    //查询总商城价
+    //查询总商城价    暫時不用
     @Override
     public R queryGoodsShopPriceSumByCarId(Integer[] carIds) {
 
@@ -199,6 +224,9 @@ public class ShoppingCarServiceImpl implements ShoppingCarService {
         }
     }
 
+
+
+
     @Override
     public R queryGoodsMarketPriceSumByCarId(Integer[] carIds) {
         if (carIds == null){
@@ -223,11 +251,5 @@ public class ShoppingCarServiceImpl implements ShoppingCarService {
 
         }
     }
-
-
-
-
-
-
 }
 

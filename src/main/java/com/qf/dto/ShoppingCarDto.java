@@ -45,6 +45,7 @@ public class ShoppingCarDto {
     @BeanCopyField("goods_shop_price")
     private Double goods_shop_price;
 
-
+    @BeanCopyField(("goods_type_name"))
+    private String goods_type_name;
 
 }

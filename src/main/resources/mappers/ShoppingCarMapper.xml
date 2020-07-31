@@ -14,7 +14,7 @@
         </foreach>
     </delete>
 
-    <select id="queryGoodsShopPriceSumByCarId" resultType="com.qf.dto.ShoppingCarDto">
+    <select id="queryGoodsShopPriceSumByCarId">
         SELECT goods.goods_shop_price, shoppingcar.car_goods_num
         FROM shoppingcar, goods
         WHERE shoppingcar.goods_id = goods.goods_id
@@ -24,7 +24,7 @@
         </foreach>
     </select>
 
-    <select id="queryGoodsMarketPriceSumByCarId" resultType="com.qf.dto.ShoppingCarDto">
+    <select id="queryGoodsMarketPriceSumByCarId">
         SELECT goods.goods_market_price, shoppingcar.car_goods_num
         FROM shoppingcar, goods
         WHERE shoppingcar.goods_id = goods.goods_id

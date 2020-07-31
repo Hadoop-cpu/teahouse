@@ -4,6 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.dao.RecipientsDao">
 
+    <select id="selectRecipientsByOne" resultType="recipients">
+        select * from recipients WHERE recipients_id = #{recipients_id};
+    </select>
+
     <select id="selectRecipientsByUserId" resultType="recipients">
         select * from recipients WHERE `recipients_user_id` = #{userId};
     </select>
@@ -33,5 +37,10 @@
         </set>
         where recipients_id = #{recipients_id}
     </update>
+
+    <insert id="insertRecipients" parameterType="recipients">
+        insert into recipients(recipients_id,recipients_user_id,recipients_name,recipients_phone,recipients_address)
+        values (#{recipients_id},#{recipients_user_id},#{recipients_name},#{recipients_phone},#{recipients_address})
+    </insert>
 
 </mapper>

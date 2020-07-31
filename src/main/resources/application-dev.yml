@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://39.99.212.23:3306/db_teahouse?serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://39.99.212.238:3306/db_teahouse?serverTimezone=Asia/Shanghai
     username: root
     password: admin
     type: com.alibaba.druid.pool.DruidDataSource
@@ -12,10 +12,11 @@ mybatis:
 
 voter:
   redis:
-    host: 39.99.212.23
+    host: 39.99.212.238
     port: 6379
     pass: admin
-
+    maxTotal: 150
+    maxIdle: 10
 
   aes:
     passkey: dP0ykNOnMdKFaXCIOnXckg==

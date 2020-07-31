@@ -9,7 +9,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @SpringBootApplication
+
 @EnableSwagger2 //启用事务
+
 @MapperScan("com.qf.dao")//扫描包
 public class TeahouseApplication extends SpringBootServletInitializer {
 

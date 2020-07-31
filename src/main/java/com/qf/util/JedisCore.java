@@ -1,53 +1,98 @@
 package com.qf.util;
 
-
+import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 /**
- * @program: HungryApi
- * @description: 封装操作Redis方法
- * @author: Feri(邢朋辉)
- * @create: 2020-06-18 10:19
+ * @ClassName: JedisCore
+ * @Author: 刘嘉豪
+ * @Date: 2020/7/15
+ * @Time: 15:30
  */
-
-//redis 方法封装
+@Slf4j
 public class JedisCore {
 
-    private Jedis jedis;
 
-    public JedisCore(String host,int port,String pass){
-        JedisPool pool=new JedisPool(host,port);
-        jedis=pool.getResource();
-        jedis.auth(pass);
+
+    private JedisPool jedisPool;
+    private String pass;
+
+
+
+    public JedisCore(int maxTotal,int maxIdle, String host, int port, String pass) {
+        //维护密码
+        this.pass=pass;
+        // 1、设置连接池的配置对象
+        JedisPoolConfig config = new JedisPoolConfig();
+        // 设置池中最大的连接数量（可选）
+        config.setMaxTotal(maxTotal);
+        // 设置空闲时池中保有的最大连接数（可选）
+        config.setMaxIdle(maxIdle);
+        jedisPool = new JedisPool(config,host,port);
+       /*jedis=jedisPool.getResource();
+        if(pass.length()!=0){//如果密码长度不为0  则添加连接密码
+            jedis.auth(pass);
+        }*/
+
+
     }
-    //新增
-    public void set(String key,String val,int seconds){
-        jedis.setex(key,seconds,val);
+    private Jedis getJedis(){
+        Jedis jedis= jedisPool.getResource();
+        if(pass.length()!=0){//如果密码长度不为0  则添加连接密码
+            //System.out.println(pass);
+            jedis.auth(pass);
+        }
+        return  jedis;
     }
-    //删除
+
+    //新增string   带过期时间
+    public void set(String key,String value,int seconds){
+        try (Jedis jedis = getJedis()) {
+            jedis.setex(key, seconds, value);
+        }
+
+    }
+    //删除string
     public void del(String key){
-        jedis.del(key);
+        try (Jedis jedis = getJedis()) {
+            jedis.del(key);
+        }
     }
     //查询
     public String get(String key){
-        return jedis.get(key);
+        try (Jedis jedis = getJedis()) {
+            return jedis.get(key);
+        }
+        // return jedis.get(key);
     }
-
-    //系统
+    //检查key是否存在
     public boolean checkKey(String key){
-        return jedis.exists(key);
-    }
+        try (Jedis jedis = getJedis()) {
+            return jedis.exists(key);
+        }
 
+    }
+    //查看key的过期时间
     public long ttl(String key){
-        return jedis.ttl(key);
+        try (Jedis jedis = getJedis()) {
+            return jedis.ttl(key);
+        }
+
     }
+    //查看某个key的数量(支持通配符)
     public int keys(String key){
-        return jedis.keys(key).size();
-    }
+        try (Jedis jedis = getJedis()) {
+            return jedis.keys(key).size();
+        }
 
+    }
+    //设置key的过期时间
     public void expire(String key,int seconds){
-        jedis.expire(key,seconds);
-    }
+        try (Jedis jedis = getJedis()) {
+            jedis.expire(key,seconds);
+        }
 
+    }
 }
